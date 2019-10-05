@@ -67,10 +67,10 @@ class DirectXRenderer {
 		}
 
 		D3D11_INPUT_ELEMENT_DESC layout[] =
-
 		{
-			//SEMANTIC NAME - SEMANTÝC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT -CLASS -INSTANCE DATA STEP RATE
-			{"POSITION",	0,	DXGI_FORMAT_R32G32B32_FLOAT,	0,	0,	D3D11_INPUT_PER_VERTEX_DATA,0}
+			//SEMANTIC NAME - SEMANTIC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT CLASS - INSTANCE DATA STEP RATE
+			{"POSITION", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,D3D11_INPUT_PER_VERTEX_DATA ,0},
+			{ "COLOR", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 12,D3D11_INPUT_PER_VERTEX_DATA ,0 }
 		};
 
 		UINT size_layout = ARRAYSIZE(layout);
@@ -295,20 +295,20 @@ public: void main()
 			printf("RenderTargetView creation failed");
 		}
 
-		FLOAT clear_color[] = { 0.1f, 0.1f, 1.0f, 1.0f };
-		//
+		//Clear color
+		FLOAT clear_color[] = { 0.4f, 0.4f, 0.4f, 1.0f };
 
-
+		//Vertex List
 		vertex list[] =
 		{
-			{-0.5f,-0.5f,0.0f,    1,0,0},
-			{ 0.0f, 0.5f,0.0f,    0,1,0},
-			{ 0.5f,-0.5f,0.0f,    0,0,1}
-
+			{-0.5f,-0.5f,0.0f,    1.0f,0.0f,0.0f},
+			{ 0.0f, 0.5f,0.0f,    0.0f,1.0f,0.0f},
+			{ 0.5f,-0.5f,0.0f,    0.0f,0.0f,1.0f}
 		};
-
 		UINT size_list = ARRAYSIZE(list);
 
+
+		//Create shaders and vertex buffer
 		createandSetShaders(device, deviceContext);
 		load(device, list, sizeof(vertex), size_list, m_vsblob->GetBufferPointer(), m_vsblob->GetBufferSize());
 
